@@ -1,14 +1,10 @@
 import village
 
 class Event():
-    def __init__(self, key, value):
-        self.key = key
+    def __init__(self, value):
         self.value = value
-    
-    # event run, will return the value, wrapper of think
-    def processEvent(self):
-        village.stats[self.key] = self.think()
         
     
     def think(self):
-        return self.value
+        key = "define key in specific event child class, key is for village stats"
+        return (key, self.value)

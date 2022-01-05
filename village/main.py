@@ -6,8 +6,13 @@ Created on Fri Dec  3 09:19:09 2021
 """
 
 from population import Population
+import village
 
 # village event iterator
-events = [Population("population", 5)]
+events = [Population(5)]
 for day in range(0, 100): # testing for three days
-    for event in events: event.processEvent()
+    for event in events: 
+        ticket = event.think()
+        village.stats[ticket[0]] += ticket[1] # update value
+    
+print("The end!")

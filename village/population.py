@@ -2,19 +2,21 @@ import random
 
 from event import Event
 from person import Person
+import log
 
 
 class Population(Event):
-    def __init__(self, key, value):
-        super().__init__(key, value)
+    def __init__(self, value):
+        super().__init__(value)
         self.persons = self.getInitialPopulation()
         self.graveyard = [] # todo make log output that doesn't need to be stored anymore
         self.partners = []
         
     def getInitialPopulation(self):
         init = []
-        for x in range(0, random.randrange(2, 10)): # populate with 2-10 adults to begin withget
+        for x in range(0, random.randrange(6, 20)): # populate with 2-10 adults to begin withget
             init.append(Person(False))
+        log.reportFounding(init)
         return init
     
     def updateDeaths(self):
@@ -22,15 +24,17 @@ class Population(Event):
             if person.naturalDeath(): # death by natural causes, bury in graveyard 
                 self.persons.remove(person)
                 self.graveyard.append(person)
+                log.reportDeath(person)
     
     # create new persons based on 
     def updateBirths(self):
         for couple in self.partners:
             x = random.randrange(0, 100)
-            if x < 5: # random chance for birth
+            if x < 2: # random chance for birth
                 child = Person(True)
                 child.parents = couple # record parents 
                 self.persons.append(child) # birth new child at age zero, TODO make it more clear? 
+                log.reportBirth(child)
     
     # update partners, if single, find a partner if available 
     def updatePartners(self):
@@ -41,6 +45,7 @@ class Population(Event):
                         first.partner = second # mawwidge 
                         second.partner = first
                         self.partners.append([first, second])
+                        log.reportMarriage(first, second)
         
     # WARNING! have a seperate instance of random for this in multithreaded programs
     # for now, represents population increase/decrease
@@ -52,4 +57,4 @@ class Population(Event):
         self.updatePartners()
         self.updateDeaths()
         self.updateBirths()
-        return len(self.persons) - prevPop # return change in population 
+        return ("population", len(self.persons) - prevPop) # return change in population 
