@@ -8,6 +8,8 @@ class Person:
             self.age = random.randrange(0, 60) # TODO: make this more complicated for choosing age?
         else: # if born, start as infant
             self.age = 0
+        self.partner = None 
+        self.parents = None 
         #self.stats = {"might":10, "wisdom":10, "health":10}
         #self.occupation = "idle" # TODO: add functionality for this?
         # TODO: implement cancelled stats above

@@ -9,5 +9,5 @@ from population import Population
 
 # village event iterator
 events = [Population("population", 5)]
-for day in (1,2,3,4,5): # testing for three days,
+for day in range(0, 100): # testing for three days
     for event in events: event.processEvent()

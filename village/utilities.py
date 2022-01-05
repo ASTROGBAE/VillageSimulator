@@ -5,4 +5,12 @@ Created on Fri Dec  3 13:41:59 2021
 @author: gabeb
 """
 
-occupations = ["labour", "domestic", "idle"]
+import random 
+
+class Utilities:
+    
+    occupations = ["labour", "domestic", "idle"]
+    
+    def rollChance(proportion):
+        pass 
+        # todo
