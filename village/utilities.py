@@ -7,10 +7,12 @@ Created on Fri Dec  3 13:41:59 2021
 
 import random 
 
-class Utilities:
-    
-    occupations = ["labour", "domestic", "idle"]
-    
-    def rollChance(proportion):
-        pass 
-        # todo
+
+occupations = ["labour", "domestic", "idle"]
+
+# param: proportion that this method will return True, False otherwise
+def rollChance(proportion):
+    chance = random.randint(0, 101) / 100
+    if (chance <= proportion):
+        return True
+    return False 

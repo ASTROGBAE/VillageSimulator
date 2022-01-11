@@ -1,9 +1,12 @@
 import random 
+import utilities
+from temporal import Temporal # TODO refactor this in this and other sections of the project...
 
-class Person:
-    def __init__(self, born):
+class Person(Temporal):
+    def __init__(self, born, birthDate):
         self.sex = random.choice(("M", "F"))
         self.name = self.genName(self.sex)
+        super().__init__(birthDate) # temporal super
         if born == False:
             self.age = random.randrange(0, 60) # TODO: make this more complicated for choosing age?
         else: # if born, start as infant
@@ -17,11 +20,9 @@ class Person:
     # returns true or false, based on if the character has died of a natural death
     # TODO very simplistic! simply trends that change of death increases a lot based on age (around 1 at 60 years)
     def naturalDeath(self):
-        deathChanceCoefficient = 0.00025
+        deathChanceCoefficient = 0.00011 # chance of death per year
         deathChance = deathChanceCoefficient * self.age * self.age
-        roll = random.randrange(0, 100) / 100
-        if (roll >= deathChance): return False # no chance of death
-        return True 
+        return self.yearlyChance(deathChance)
         
         
     # return string of randomly generated name
