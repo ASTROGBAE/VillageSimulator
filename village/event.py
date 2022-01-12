@@ -16,7 +16,6 @@ class Event(Temporal):
         secDifference = (newDate - self.date).total_seconds() 
         totalWork = 0
         for i in range(0, int(secDifference)): # do work based on difference in seconds since last log, TODO deal with the fact we are converint to int?
-            print("cuSecond: " + str(i))
             curDate = newDate + timedelta(seconds=secDifference)
             self.date = curDate # update time
             totalWork += self.think(curDate) # log each new date

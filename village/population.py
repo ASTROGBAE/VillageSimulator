@@ -22,7 +22,7 @@ class Population(Event):
             # add optional parameters to the above?
             init += couple
             self.partners.append(couple)
-            if utilities.rollChance(30): # roll for children of couple
+            if utilities.rollChance(0.3): # roll for children of couple
                 child = Person(False, self.date)
                 child.parents = couple
                 init.append(child)
