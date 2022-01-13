@@ -3,6 +3,7 @@ from temporal import Temporal
 
 class Village(Temporal):
     
+    # name of town and starting date
     def __init__(self, name, date):
         self.stats = {"name": name,
         "day": 0, "food": 10, "population": 5,

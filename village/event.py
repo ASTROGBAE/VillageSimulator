@@ -11,12 +11,12 @@ class Event(Temporal):
         value = 0
         return value # returns (key, value)
         
-    # think wrapper class to iterate through total seconds since last operation
+    # think wrapper class to iterate through total iterations since last operation
     def work(self, newDate):
-        secDifference = (newDate - self.date).total_seconds() 
+        dateDifference = self.dateDiffToIt(newDate - self.date)
         totalWork = 0
-        for i in range(0, int(secDifference)): # do work based on difference in seconds since last log, TODO deal with the fact we are converint to int?
-            curDate = newDate + timedelta(seconds=secDifference)
+        for i in range(0, int(dateDifference)): # do work based on difference in seconds since last log, TODO deal with the fact we are converint to int?
+            curDate = newDate + self.getItTimeDelta(dateDifference) # uhhh how does this work, TODO fix date increments?
             self.date = curDate # update time
             totalWork += self.think(curDate) # log each new date
         return (self.villageStat, totalWork)

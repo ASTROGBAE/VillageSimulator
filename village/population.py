@@ -16,7 +16,7 @@ class Population(Event):
         
     def getInitialPopulation(self):
         init = []
-        for x in range(1, random.randrange(5, 12)): # populate pre-existing couples
+        for x in range(1, random.randrange(2, 5)): # create couples
             couple = [Person(False, self.date), Person(False, self.date)] # TODO add option to make mature adult?, make sure male and female pairs?
             # TODO make persons more complicated so show birth date beforehand, add optional params?
             # add optional parameters to the above?
@@ -26,7 +26,7 @@ class Population(Event):
                 child = Person(False, self.date)
                 child.parents = couple
                 init.append(child)
-        for x in range(0, random.randrange(0, 25)): # populate with random adults without couples
+        for x in range(0, random.randrange(0, 3)): # populate with random adults without couples
             init.append(Person(False, self.date))
         log.reportFounding(self.date, init)
         return init
