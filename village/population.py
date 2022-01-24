@@ -9,10 +9,22 @@ import utilities
 
 class Population(Event):
     def __init__(self, date):
-        super().__init__("population", date) # define key and starting date
+        super().__init__(["population"], date) # define key and starting date
         self.graveyard = [] # todo make log output that doesn't need to be stored anymore
         self.partners = []
         self.persons = self.getInitialPopulation()
+        
+    # WARNING! have a seperate instance of random for this in multithreaded programs
+    # for now, represents population increase/decrease
+    # OVERRIDE of think in event parent class
+    # update village object
+    def think(self, newDate):
+        prevPop = len(self.persons)
+        # update stuff...
+        self.updatePartners(newDate)
+        self.updateDeaths(newDate)
+        self.updateBirths(newDate)
+        return len(self.persons) - prevPop # return change in population 
         
     def getInitialPopulation(self):
         init = []
@@ -65,15 +77,3 @@ class Population(Event):
                             self.partners.append([first, second])
                             log.reportMarriage(newDate, first, second)
                             break # found a partner, time to leave
-        
-    # WARNING! have a seperate instance of random for this in multithreaded programs
-    # for now, represents population increase/decrease
-    # OVERRIDE of think in event parent class
-    # update village object
-    def think(self, newDate):
-        prevPop = len(self.persons)
-        # update stuff...
-        self.updatePartners(newDate)
-        self.updateDeaths(newDate)
-        self.updateBirths(newDate)
-        return len(self.persons) - prevPop # return change in population 
