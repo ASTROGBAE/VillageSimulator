@@ -18,7 +18,7 @@ town = village.Village("Appleton", startDate)
 for i in range(0, town.dateDiffToIt(duration)): # calculate by second, TODO work out how to deal with returning total seconds not equal?
     for event in events: # todo: make it so this affects a group of stats?
         workDict = event.work((startDate + town.getItTimeDelta(i))) # think and log time 
-        for key in workDict:
-            town.stats[key] += workDict[key] # update value (key, value)
+        for key, value in workDict.items():
+            town.stats[key] += value # update value (key, value)
     
 print("The end!")
