@@ -10,16 +10,19 @@ class Village(Temporal):
         "plots": {"farm":2, "house":1}}
         super().__init__(date)
     
-    # get village statistic
-    def getStat(self, statistic):
-        return self.stats[statistic]
+    # get village statistics as a list
+    def getStatsList(self, keyList):
+        valueList = ()
+        for key in keyList:
+            valueList += [self.stats[key]]
+        return valueList
 
     # get village plot statistic
     def getPlot(self, plot):
         return self.stats["plots"][plot]
 
     # set village statistic
-    def setStat(self, statistic, value):
+    def setStats(self, statistic, value):
         self.stats[statistic] = value
         
     def updateDay(self): # TODO change to datetime with diff 
