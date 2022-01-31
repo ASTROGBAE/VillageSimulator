@@ -6,7 +6,7 @@ class Village(Temporal):
     # name of town and starting date
     def __init__(self, name, date):
         self.stats = {"name": name,
-        "day": 0, "food": 10, "population": 5,
+        "day": 0, "food": 10, "population": 5, "weather": 25,
         "plots": {"farm":2, "house":1}}
         super().__init__(date)
     
