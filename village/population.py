@@ -25,7 +25,7 @@ class Population(Event):
         self.updatePartners(newDate)
         self.updateDeaths(newDate)
         self.updateBirths(newDate)
-        return tic.Ticket( [self.keysToSet, [len(self.persons) - prevPop]] ) # return ticket with change in population [keyList][val]
+        return tic.Ticket([self.keysToSet, [len(self.persons) - prevPop]]) # return ticket with change in population [keyList][val]
         
     def getInitialPopulation(self):
         init = []

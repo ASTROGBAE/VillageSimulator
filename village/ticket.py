@@ -2,6 +2,7 @@ class Ticket():
     """start param can be list of strings OR a dictoionary containing values
     """
     def __init__(self, _startParam):
+        # TODO scope keyList so we don't need it, make it so we can just get keys from dict, don't need a list...
         self.keyList = [] # TODO class encapsulation on keyList?
         self.statDict = {}
         if isinstance(_startParam, list) and isinstance(_startParam[0], str): # if list of strings (keyList), simply add and set all values to 0
@@ -15,7 +16,7 @@ class Ticket():
         elif isinstance(_startParam, list) and len(_startParam) == 2 and isinstance(_startParam[0], list) and isinstance(_startParam[1], list): # if of format [keyList][valPerKey]
             for key in _startParam[0]:
                 for val in _startParam[1]: # add in key,val as per above format: [keyList][val]
-                    self.keyList += key
+                    self.keyList += [key]
                     self.statDict[key] = val
         #else:
             # TODO invalid start param?

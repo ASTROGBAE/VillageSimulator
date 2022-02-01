@@ -23,10 +23,13 @@ class Event(Temporal):
         return tic.Ticket(self.keysToSet)
         
     # think wrapper class to iterate through total iterations since last operation
+    # TODO fix this for temporal class?
     def work(self, newDate):
         ticket = tic.Ticket(self.keysToSet) # simple scoping, will be removed after use
         dateDifference = self.dateDiffToIt(newDate - self.date) # iterate through all increments since last log
         for i in range(0, int(dateDifference)): # do work based on difference in seconds since last log, TODO deal with the fact we are converint to int?
-            ticket.addTicket(self.think(newDate))
+            thoughtTicket = self.think(newDate)
+            ticket.addTicket(thoughtTicket)
+        self.date = newDate # update new date
         return ticket
         
