@@ -17,8 +17,6 @@ town = vil.Village("Appleton", startDate)
 for i in range(0, town.dateDiffToIt(duration)): # calculate by second, TODO work out how to deal with returning total seconds not equal?
     for event in events: # todo: make it so this affects a group of stats?
         workTicket = event.work((startDate + town.getItTimeDelta(i))) # think and log time 
-        for key, value in workTicket.statDict:
-            town.stats[key] += value # update value (key, value)
-            # TODO make it so the town updating simply passes a "ticket" object, also make village allow requesting and adding tickets, too
+        town.addVillageTicket(workTicket) # pass difference in ticket values, update stats
     
 print("The end!")
