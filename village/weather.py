@@ -1,4 +1,5 @@
 from event import Event
+import ticket as tic
 
 class Weather(Event):
     def __init__(self, date):
@@ -9,4 +10,4 @@ class Weather(Event):
      # represents degrees celcius 
     def think(self, newDate):
         value = 25
-        return value # returns (key, value)
+        return tic.Ticket( [self.keysToSet, [25]] ) # return ticket [keyList][val]

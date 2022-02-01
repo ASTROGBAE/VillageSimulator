@@ -4,18 +4,21 @@ class Ticket():
     def __init__(self, _startParam):
         self.keyList = [] # TODO class encapsulation on keyList?
         self.statDict = {}
-        if isinstance(_startParam, list):
+        if isinstance(_startParam, list) and isinstance(_startParam[0], str): # if list of strings (keyList), simply add and set all values to 0
+            # TODO make this stype-checking better? Check if all entries are strings...
             self.keyList = _startParam
-            self.resetDeltaDict()
+            for key in self.keyList: self.statDict[key] = 0
         elif isinstance(_startParam, dict):
             for key, val in _startParam.items():
                 self.keyList += key
                 self.statDict[key] = val
-    
-    def resetDeltaDict(self): # TODO is this reset necessary? Just make a new ticket!
-        """reset all values in deltaDict to 0 for next operation
-        """
-        for key in self.keyList: self.statDict[key] = 0 # add 
+        elif isinstance(_startParam, list) and len(_startParam) == 2 and isinstance(_startParam[0], list) and isinstance(_startParam[1], list): # if of format [keyList][valPerKey]
+            for key in _startParam[0]:
+                for val in _startParam[1]: # add in key,val as per above format: [keyList][val]
+                    self.keyList += key
+                    self.statDict[key] = val
+        #else:
+            # TODO invalid start param?
         
     def addValue(self, key, val):
         """add val to Delta TODO make this delta group its own class?

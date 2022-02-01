@@ -3,6 +3,7 @@ import datetime
 
 from event import Event
 from person import Person
+import ticket as tic
 import log
 import utilities
 
@@ -24,7 +25,7 @@ class Population(Event):
         self.updatePartners(newDate)
         self.updateDeaths(newDate)
         self.updateBirths(newDate)
-        return len(self.persons) - prevPop # return change in population 
+        return tic.Ticket( [self.keysToSet, [len(self.persons) - prevPop]] ) # return ticket with change in population [keyList][val]
         
     def getInitialPopulation(self):
         init = []
